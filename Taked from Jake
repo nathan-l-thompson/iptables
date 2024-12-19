@@ -1,0 +1,95 @@
+input = dport:output = sport
+sudo iptables -A  INPUT -p tcp --dport 22   -j ACCEPT 
+sudo iptables -A  INPUT -p tcp --sport 22   -j ACCEPT         
+sudo iptables -A  INPUT -p tcp --dport 23   -j ACCEPT             
+sudo iptables -A  INPUT -p tcp --sport 23   -j ACCEPT
+sudo iptables -A  INPUT -p tcp --dport 3389 -j ACCEPT
+sudo iptables -A  INPUT -p tcp --sport 3389 -j ACCEPT
+sudo iptables -A  INPUT -p icmp --icmp-type echo-request -s 10.10.0.40    -j ACCEPT
+sudo iptables -A  INPUT -p icmp --icmp-type echo-reply   -s 10.10.0.40    -j ACCEPT 
+sudo iptables -A  INPUT -p tcp --dport 6579 -j ACCEPT
+sudo iptables -A  INPUT -p tcp --sport 6579 -j ACCEPT
+sudo iptables -A  INPUT -p udp --dport 6579 -j ACCEPT
+sudo iptables -A  INPUT -p udp --sport 6579 -j ACCEPT
+sudo iptables -A  INPUT -p tcp --dport 4444 -j ACCEPT
+sudo iptables -A  INPUT -p tcp --sport 4444 -j ACCEPT
+sudo iptables -A  INPUT -p udp --dport 4444 -j ACCEPT
+sudo iptables -A  INPUT -p udp --sport 4444 -j ACCEPT
+sudo iptables -A  INPUT -p tcp --dport 80   -j ACCEPT
+sudo iptables -A  INPUT -p tcp --sport 80   -j ACCEPT
+
+
+
+
+
+
+sudo iptables -A  OUTPUT -p tcp --sport 22   -j ACCEPT
+sudo iptables -A  OUTPUT -p tcp --dport 22   -j ACCEPT          
+sudo iptables -A  OUTPUT -p tcp --sport 23   -j ACCEPT 
+sudo iptables -A  OUTPUT -p tcp --dport 23   -j ACCEPT 
+sudo iptables -A  OUTPUT -p tcp --sport 3389 -j ACCEPT
+sudo iptables -A  OUTPUT -p tcp --dport 3389 -j ACCEPT
+sudo iptables -A  OUTPUT -p icmp --icmp-type echo-request -d 10.10.0.40   -j ACCEPT
+sudo iptables -A  OUTPUT -p icmp --icmp-type echo-reply   -d 10.10.0.40   -j ACCEPT 
+sudo iptables -A  OUTPUT -p tcp --sport 6579 -j ACCEPT
+sudo iptables -A  OUTPUT -p tcp --dport 6579 -j ACCEPT
+sudo iptables -A  OUTPUT -p udp --sport 6579 -j ACCEPT
+sudo iptables -A  OUTPUT -p udp --dport 6579 -j ACCEPT
+sudo iptables -A  OUTPUT -p tcp --sport 4444 -j ACCEPT
+sudo iptables -A  OUTPUT -p tcp --dport 4444 -j ACCEPT
+sudo iptables -A  OUTPUT -p udp --sport 4444 -j ACCEPT
+sudo iptables -A  OUTPUT -p udp --dport 4444 -j ACCEPT
+sudo iptables -A  OUTPUT -p tcp --sport 80   -j ACCEPT
+sudo iptables -A  OUTPUT -p tcp --dport 80   -j ACCEPT
+
+
+
+-------------NFTABLES---------------------
+
+
+sudo nft add table ip CCTC
+sudo nft add chain ip CCTC INPUT {type filter hook input priority 0 \; accept \;}
+sudo nft add chain ip CCTC OUTPUT {type filter hook output priority 0 \; accept \;}
+sudo nft add rule ip CCTC INPUT  tcp dport {22, 23, 3389} accept
+sudo nft add rule ip CCTC INPUT  tcp sport {22, 23, 3389} accept
+sudo nft add rule ip CCTC OUTPUT tcp dport {22, 23, 3389} accept
+sudo nft add rule ip CCTC OUTPUT tcp sport {22, 23, 3389} accept
+
+sudo nft add chain ip CCTC INPUT { \; policy drop \; }
+sudo nft add chain ip CCTC OUTPUT { \; policy drop \; }
+
+sudo nft add rule ip CCTP INPUT   icmp type {echo-request, echo-reply} ip saddr 10.10.0.40 accept
+sudo nft add rule ip CCTP INPUT   icmp type {echo-request, echo-reply} ip daddr 10.10.0.40 accept
+sudo nft add rule ip CCTP OUTPUT  icmp type {echo-request, echo-reply} ip saddr 10.10.0.40 accept
+sudo nft add rule ip CCTP OUTPUT  icmp type {echo-request, echo-reply} ip daddr 10.10.0.40 accept
+
+
+sudo nft add rule ip CCTC INPUT   tcp dport {5050, 5150} accept
+sudo nft add rule ip CCTC INPUT   tcp sport {5050, 5150} accept
+sudo nft add rule ip CCTC OUTPUT  tcp sport {5050, 5150} accept
+sudo nft add rule ip CCTC OUTPUT  tcp dport {5050, 5150} accept
+
+sudo nft add rule ip CCTC INPUT   udp dport {5050, 5150} accept
+sudo nft add rule ip CCTC INPUT   udp sport {5050, 5150} accept
+sudo nft add rule ip CCTC OUTPUT  udp sport {5050, 5150} accept
+sudo nft add rule ip CCTC OUTPUT  udp dport {5050, 5150} accept
+
+sudo nft add rule ip CCTC INPUT   tcp dport {80} accept
+sudo nft add rule ip CCTC INPUT   tcp sport {80} accept
+sudo nft add rule ip CCTC OUTPUT  tcp dport {80} accept
+sudo nft add rule ip CCTC OUTPUT  tcp sport {80} accept
+
+9003 - 05e5fb96e2a117e01fc1227f1c4d664c
+
+9002 - 9f7a33941828bdafd2755fd20176cdf4
+
+9001 - 467accfb25050296431008a1357eacb1
+
+
+
+
+
+
+
+
+
