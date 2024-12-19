@@ -1,1 +1,41 @@
 sudo nft add chain ip CCTC input { type filter hook input priority 0 \; policy accept \; }
+
+
+
+student@blue-host-3-student-19:~$ sudo nft list chain ip CCTC input -a
+table ip CCTC {
+	chain input { # handle 1
+		type filter hook input priority 0; policy drop;
+		ct state { established, new } tcp sport { ssh, telnet, 3389 } accept # handle 16
+		ct state { established, new } tcp dport { ssh, telnet, 3389 } accept # handle 22
+		tcp sport { mmcc, 5150 } accept # handle 45
+		tcp dport { mmcc, 5150 } accept # handle 47
+		udp dport { mmcc, 5150 } accept # handle 49
+		udp sport { mmcc, 5150 } accept # handle 51
+		ct state { established, new } tcp sport http accept # handle 57
+		ct state { established, new } tcp dport http accept # handle 59
+		ip daddr 172.16.82.112 icmp type { echo-reply, echo-request } accept # handle 71
+		ip saddr 172.16.82.112 icmp type { echo-reply, echo-request } accept # handle 73
+		ip daddr 10.10.0.40 icmp type { echo-reply, echo-request } accept # handle 75
+		ip saddr 10.10.0.40 icmp type { echo-reply, echo-request } accept # handle 77
+	}
+}
+student@blue-host-3-student-19:~$ sudo nft list chain ip CCTC output -a
+table ip CCTC {
+	chain output { # handle 2
+		type filter hook output priority 0; policy drop;
+		ct state { established, new } tcp sport { ssh, telnet, 3389 } accept # handle 19
+		ct state { established, new } tcp dport { ssh, telnet, 3389 } accept # handle 25
+		tcp sport { mmcc, 5150 } accept # handle 37
+		tcp dport { mmcc, 5150 } accept # handle 39
+		udp dport { mmcc, 5150 } accept # handle 41
+		udp sport { mmcc, 5150 } accept # handle 43
+		ct state { established, new } tcp dport http accept # handle 53
+		ct state { established, new } tcp sport http accept # handle 55
+		ip daddr 172.16.82.112 icmp type { echo-reply, echo-request } accept # handle 63
+		ip saddr 172.16.82.112 icmp type { echo-reply, echo-request } accept # handle 65
+		ip saddr 10.10.0.40 icmp type { echo-reply, echo-request } accept # handle 67
+		ip daddr 10.10.0.40 icmp type { echo-reply, echo-request } accept # handle 69
+	}
+}
+student@blue-host-3-student-19:~$ 
