@@ -1,0 +1,58 @@
+iptables -t * -L --line-numbers
+    2  sudo iptables -t * -L --line-numbers
+    3  sudo iptables -L --line-numbers
+    4  iptables -t filter -I INPUT -p tcp --sport 22:23:3389 -j ACCEPT
+    5  sudo iptables -t filter -I INPUT -p tcp --sport 22:23:3389 -j ACCEPT
+    6* 
+    7  sudo iptables -L --line-numbers
+    8  sudo iptables -t filter -P INPUT DROP
+    9  sudo iptables -t filter -P OUTPUT DROP
+   10  sudo iptables -L --line-numbers
+   11  sudo iptables -A INPUT -p tcp -m  multiport --dports 22,23,3389 -m state NEW,ESTABLISHED -j ACCEPT
+   12  sudo iptables -A INPUT -p tcp -m  multiport --dports 22,23,3389 -m --state NEW,ESTABLISHED -j ACCEPT
+   13  sudo iptables -A INPUT -p tcp -m multiport --dports 22,23,3389 -m --state NEW,ESTABLISHED -j ACCEPT
+   14  sudo iptables -A INPUT -p tcp -m multiport --dports 22,23,3389 -m state NEW,ESTABLISHED -j ACCEPT
+   15  sudo iptables -A INPUT -p tcp -m multiport --dports 22,23,3389 -m --ctstate NEW,ESTABLISHED -j ACCEPT
+   16  sudo iptables -A INPUT -p tcp -m multiport --dports 22,23,3389 -m --state ESTABLISHED -j ACCEPT
+   17  sudo iptables -A INPUT -p tcp -m multiport --dports 22,23,3389 -m state ESTABLISHED -j ACCEPT
+   18  sudo iptables -A INPUT -p tcp -m multiport --dports 22,23,3389 -m state NEW -j ACCEPT
+   19  sudo iptables -A INPUT -p tcp -m multiport --dports 22,23,3389 -m --state NEW -j ACCEPT
+   20  sudo iptables -A INPUT -p tcp -m multiport --dports 22,23,3389 -m state --state NEW,ESTABLISHED -j ACCEPT
+   21  sudo iptables -A INPUT -p tcp -m multiport --sports 22,23,3389 -m state --state NEW,ESTABLISHED -j ACCEPT
+   22  sudo iptables -A OUTPUT -p tcp -m multiport --sports 22,23,3389 -m state --state NEW,ESTABLISHED -j ACCEPT
+   23  sudo iptables -A OUTPUT -p tcp -m multiport --dports 22,23,3389 -m state --state NEW,ESTABLISHED -j ACCEPT
+   24  sudo iptables -A INPUT -p tcp -m multiport --dports 6579,4444 -m state --state NEW,ESTABLISHED -j ACCEPT
+   25  sudo iptables -A INPUT -p tcp -m multiport --sports 6579,4444 -m state --state NEW,ESTABLISHED -j ACCEPT
+   26  sudo iptables -A OUTPUT -p tcp -m multiport --sports 6579,4444 -m state --state NEW,ESTABLISHED -j ACCEPT
+   27  sudo iptables -A OUTPUT -p tcp -m multiport --dports 6579,4444 -m state --state NEW,ESTABLISHED -j ACCEPT
+   28  sudo iptables -A OUTPUT -p tcp -m multiport --dports 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+   29  sudo iptables -A OUTPUT -p tcp -m multiport --sports 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+   30  sudo iptables -A input -p tcp -m multiport --sports 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+   31  sudo iptables -A INPUT -p tcp -m multiport --sports 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+   32  sudo iptables -A INPUT -p tcp -m multiport --dports 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+   33  sudo iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+   34  iptables -t filter --lis
+   35  sudo iptables -t filter --list
+   36  sudo iptables -t filter --list --line-numbers
+   37  sudo iptables -t filter -D INPUT 7
+   38  sudo iptables -t filter --list
+   39  sudo iptables -A INPUT -s 172.16.82.106 -d 10.10.0.40 -p icmp --icmp-type echo-reply -j ACCEPT
+   40  sudo iptables -A INPUT -d 172.16.82.106 -s 10.10.0.40 -p icmp --icmp-type echo-reply -j ACCEPT
+   41  sudo iptables -A INPUT -d 172.16.82.106 -s 10.10.0.40 -p icmp --icmp-type echo-request -j ACCEPT
+   42  sudo iptables -A INPUT -s 172.16.82.106 -d 10.10.0.40 -p icmp --icmp-type echo-request -j ACCEPT
+   43  sudo iptables -t filter -P INPUT DROP
+   44  sudo iptables -t filter -P OUTPUT DROP
+   45  sudo iptables -t filter -P FORWARD DROP
+   46  sudo iptables -t filter --list
+   47  sudo iptables -A INPUT -p udp -m multiport --sports 6579,4444 -m state --state NEW,ESTABLISHED -j ACCEPT
+   48  sudo iptables -A OUTOUT -p udp -m multiport --sports 6579,4444 -m state --state NEW,ESTABLISHED -j ACCEPT
+   49  sudo iptables -A OUTPUT -p udp -m multiport --sports 6579,4444 -m state --state NEW,ESTABLISHED -j ACCEPT
+   50  sudo iptables -A INPUT -p udp -m multiport --dports 6579,4444 -m state --state NEW,ESTABLISHED -j ACCEPT
+   51  sudo iptables -A OUTPUT -p udp -m multiport --dports 6579,4444 -m state --state NEW,ESTABLISHED -j ACCEPT
+   52  sudo iptables -t filter --list
+   53  sudo iptables -A OUTPUT -s 172.16.82.106 -d 10.10.0.40 -p icmp --icmp-type echo-reply -j ACCEPT
+   54  sudo iptables -A OUTPUT -d 172.16.82.106 -s 10.10.0.40 -p icmp --icmp-type echo-reply -j ACCEPT
+   55  sudo iptables -A OUTPUT -d 172.16.82.106 -s 10.10.0.40 -p icmp --icmp-type echo-request -j ACCEPT
+   56  sudo iptables -A OUTPUT -s 172.16.82.106 -d 10.10.0.40 -p icmp --icmp-type echo-request -j ACCEPT
+   57  sudo iptables -t filter --list
+   58  history
