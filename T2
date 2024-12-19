@@ -1,0 +1,1 @@
+sudo nft add chain ip CCTC input { type filter hook input priority 0 \; policy accept \; }
