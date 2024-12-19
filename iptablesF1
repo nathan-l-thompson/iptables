@@ -56,3 +56,5 @@ iptables -t * -L --line-numbers
    56  sudo iptables -A OUTPUT -s 172.16.82.106 -d 10.10.0.40 -p icmp --icmp-type echo-request -j ACCEPT
    57  sudo iptables -t filter --list
    58  history
+9f7a33941828bdafd2755fd20176cdf4 - T2
+05e5fb96e2a117e01fc1227f1c4d664c - T3
